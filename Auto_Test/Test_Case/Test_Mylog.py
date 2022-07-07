@@ -9,12 +9,13 @@ from Auto_Test.element.log import GetLogger
 mylogger = GetLogger(logger='Test_mylog').get_logger()
 
 
+
 class Test_mylog(Basepage):
+
     """测试"""
     def test_01(self):
         self.showH5() #调用封装的函数
-        self.driver.implicitly_wait(8)
-        self.driver.get('https://market.m.taobao.com/app/pm/new-main/home?pha=true&disableNav=YES')
+        self.base_open_url('https://market.m.taobao.com/app/pm/new-main/home?pha=true&disableNav=YES')
         mylogger.info('打开拍卖首页')
         time.sleep(2)
         mylogger.info('暂停2秒')
@@ -30,6 +31,10 @@ class Test_mylog(Basepage):
         if self.base_element_is_exist == 'false' :
             assert '新人弹框去除'
         time.sleep(1)
+        self.base_get_image()
+        #斷言為全部房源
+        ret = self.base_get_text('xpath','//*[@id="guid-3768879500"]/div/div[1]/div/div/span')
+        self.driver.assertEqual(ret,"全部房源")
         self.base_get_image()
         self.driver.quit()
         mylogger.info('浏览器关闭并推出服务')

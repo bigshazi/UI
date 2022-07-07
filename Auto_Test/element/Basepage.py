@@ -10,7 +10,7 @@ from Auto_Test.element.log import GetLogger
 
 log = GetLogger(logger='Basepage').get_logger()
 
-class Basepage(object):
+class Basepage():
     """
         定义一个页面基类，让所有页面都继承这个类，封装一些常用的页面操作方法到这个类
     """
@@ -50,28 +50,40 @@ class Basepage(object):
         options = webdriver.ChromeOptions()
         options.add_experimental_option('mobileEmulation', mobile_emulation)
         self.driver = webdriver.Chrome(r'D:\Win_TestEngineLite_20210120\chromedriver.exe', chrome_options=options)
+        self.driver.set_window_size(375,812)
         self.driver.maximize_window()
-        return self.driver
+        self.driver.implicitly_wait(8)
+
 
     # #浏览器后退
     def base_back(self):
+        log.info("浏览器后退")
         self.driver.back()
 
     # #浏览器前进
     def base_forward(self):
+        log.info("浏览器前进")
         self.driver.forward()
 
     # #打开浏览器
     def base_open_url(self,url):
+        log.info("正在打开{}页面".format(url))
         self.driver.get(url)
 
     # #关闭并停止浏览器服务
     def base_quit_browser(self):
+        log.info("关闭并停止浏览器")
         self.driver.quit()
 
     # #刷新浏览器
     def base_refresh_browser(self):
+        log.info("正在刷新浏览器")
         self.driver.refresh()
+
+    #等待
+    def base_wait(self,time):
+        log.info("浏览器等待{}秒".format(time))
+        self.driver.implicitly_wait(time)
 
     #点击元素方法
     def base_click(self,type,element):
@@ -83,27 +95,27 @@ class Basepage(object):
             log.error("无法单击元素 %s" % e)
 
     #输入元素方法
-    def base_input(self,element,value):
+    def base_input(self,type,element,value):
         log.info("[base]:正在对：{}元素输入{}".format(element,value))
         #获取元素
-        el = self.driver.find_element(element)
+        el = self.find_element(type,element)
         #清空 这里应该是为了清空自带的值
         el.clear()
         #输入
         el.send_keys(value)
 
     #获取文本信息
-    def base_get_text(self,element):
+    def base_get_text(self,type,element):
         log.info("[base]:正在获取：{}元素文本值".format(element))
-        dr = self.driver.find_element(element).text
+        dr = self.find_element(type,element).text
         return dr #返回获取的文本值
 
     #截图方法
-    def base_get_image(self):
+    def base_get_image(self,name):
         #截图并保存在img文件夹下
         file_path = os.path.dirname(os.getcwd()) + '/screenshots/' #查找根目录下的文件夹地址
         rq = time.strftime('%Y年%m月%d日%H时%M分%S秒', time.localtime(time.time()))
-        screen_name = file_path + rq + '.png'
+        screen_name = file_path + name + rq + '.png'
         try:
             self.driver.get_screenshot_as_file(screen_name)
             log.info("[base]: 开始截图并保存")
@@ -111,9 +123,9 @@ class Basepage(object):
             log.error("出现异常",format(e))
 
     #判断元素是否存在于页面
-    def base_element_is_exist(self,element):
+    def base_element_is_exist(self,type,element):
         try:
-            self.driver.find_element(element)
+            self.find_element(type,element)
             log.info("[base]:{}元素查到成功，存在于当前页面".format(element)) #这里的format方法把元素值放到了{}钟
             return True #代表元素存在
         except:
@@ -144,15 +156,15 @@ class Basepage(object):
         self.driver.switch_to.alert.dismiss()
 
     #鼠标悬停
-    def base_mouse_over(self,element):
+    def base_mouse_over(self,type,element):
         log.info("[base]:鼠标悬停{}元素".format(element))
-        el = self.driver.find_element(element)
+        el = self.find_element(type,element)
         ActionChains(self.driver).move_to_element(el).perform()#参考文档https://www.cnblogs.com/colin2012/p/8872291.html
 
     #鼠标移动元素-坐标
-    def base_mouse_mover(self,element,x,y):
+    def base_mouse_mover(self,type,element,x,y):
         log.info("[base]:鼠标移动{}元素".format(element))
-        el = self.driver.find_element(element)
+        el = self.find_element(type,element)
         ActionChains(self.driver).drag_and_drop_by_offset(el,x,y).perform()
 
     #鼠标点击坐标
@@ -167,9 +179,9 @@ class Basepage(object):
         self.driver.tap([(x1, y1), (x1, y1)], duration)
 
     #切换frame表单方法
-    def base_switch_frame(self,element):
+    def base_switch_frame(self,type,element):
         log.info("[base]:切换到{}fram表单".format(element))
-        el = self.driver.find_element(element) #获取表单元素
+        el = self.find_element(type,element) #获取表单元素
         self.driver.switch_to.frame(el)
 
     # 回到默认目录方法
@@ -182,35 +194,35 @@ class Basepage(object):
         """
         回车
         """
-        self.driver.find_element(element).send_keys(Keys.ENTER)
+        self.find_element(element).send_keys(Keys.ENTER)
         log.info("对%s进行回车" % element['element_name'])
 
-    def key_ctrl_a(self, element):
+    def key_ctrl_a(self,type,element):
         """
         全选
         """
-        self.driver.find_element(element).send_keys(Keys.CONTROL, 'a')
+        self.find_element(type,element).send_keys(Keys.CONTROL, 'a')
         log.info("对%s全选" % element['element_name'])
 
-    def key_ctrl_c(self, element):
+    def key_ctrl_c(self,type,element):
         """
         复制
         """
-        self.driver.find_element(element).send_keys(Keys.CONTROL, 'c')
+        self.find_element(type,element).send_keys(Keys.CONTROL, 'c')
         log.info("对%s复制" % element['element_name'])
 
-    def key_ctrl_v(self, element):
+    def key_ctrl_v(self,type,element):
         """
         粘贴
         """
-        self.driver.find_element(element).send_keys(Keys.CONTROL, 'v')
+        self.find_element(type,element).send_keys(Keys.CONTROL, 'v')
         log.info("对%s粘贴" % element['element_name'])
 
-    def key_ctrl_x(self, element):
+    def key_ctrl_x(self,type,element):
         """
         剪切
         """
-        self.driver.find_element(element).send_keys(Keys.CONTROL, 'x')
+        self.find_element(type,element).send_keys(Keys.CONTROL, 'x')
         log.info("对%s剪切" % element['element_name'])
 
 
