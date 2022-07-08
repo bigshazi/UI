@@ -1,6 +1,9 @@
 
 import time
 import unittest
+
+from BeautifulReport import BeautifulReport
+
 from Auto_Test.element.Basepage import Basepage
 from Auto_Test.element.log import GetLogger
 
@@ -11,6 +14,7 @@ class Test_case_search(unittest.TestCase):
 
     def setUp(self):
         self.driver = Basepage('driver') #用于前置引用基础类的方法
+
 
     def test_01(self):
         # 切换成H5显示
@@ -40,8 +44,39 @@ class Test_case_search(unittest.TestCase):
             mylogger.error('断言失败的原因是{}'.format(e))
             time.sleep(2)
             self.driver.base_get_image('断言失败截图')
-
             #将失败截图放到html报告中
+
+    def test_02(self):
+        self.driver.showH5()  # 调用封装的函数
+        self.driver.base_open_url('https://market.m.taobao.com/app/pm/new-main/home?pha=true&disableNav=YES')
+        mylogger.info('打开拍卖首页')
+        time.sleep(2)
+        mylogger.info('暂停2秒')
+        self.driver.base_click("xpath", "//a[.='房产']")
+        mylogger.info('点击跳转')
+        time.sleep(2)
+        # 截图
+        self.driver.base_get_image("跳转截图")
+        # 去掉新人弹框
+        self.driver.base_click('class_name', 'mask')
+        # 做个断言，判断新人弹框消失，并截图
+        if self.driver.base_element_is_exist('class_name', 'mask') == 'false':
+            assert '新人弹框去除'
+        time.sleep(1)
+        self.driver.base_get_image("去除新人弹框")
+        # 斷言為全部房源
+        ret = self.driver.base_get_text('xpath', '//*[@id="guid-3768879500"]/div/div[1]/div/div/span')
+        try:
+            self.assertIn("全部房源", ret)
+            mylogger.info('断言成功')
+            time.sleep(2)
+            self.driver.base_get_image('断言成功截图')
+        except Exception as e :
+            mylogger.error('断言失败的原因是{}'.format(e))
+            time.sleep(2)
+            self.driver.base_get_image('断言失败截图')
+        self.driver.base_quit_browser()
+        mylogger.info('浏览器关闭并推出服务')
 
     def tearDown(self):
         self.driver.base_quit_browser()  # 后置退出浏览器
