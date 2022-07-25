@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Jul 20 22:05:17 CST 2022","Wed Jul 20 22:05:17 CST 2022","0","Auto_Test.Test_Case.product_manage","test_case03","Test_pm","","","test_03",""
+"passed","Wed Jul 20 22:05:17 CST 2022","Wed Jul 20 22:05:17 CST 2022","0","Auto_Test.Test_Case.user_manage","test_case04","Test_um","","","test_08",""
+"passed","Wed Jul 20 22:05:17 CST 2022","Wed Jul 20 22:05:17 CST 2022","1","Auto_Test.Test_Case.product_manage","test_case03","Test_pm","","","test_02",""
+"failed","Wed Jul 20 22:05:16 CST 2022","Wed Jul 20 22:05:16 CST 2022","0","Auto_Test.Test_Case.product_manage","test_case03","Test_pm","","","test_01",""
+"passed","Wed Jul 20 22:05:17 CST 2022","Wed Jul 20 22:05:17 CST 2022","0","Auto_Test.Test_Case.user_manage","test_case04","Test_um","","","test_07",""
+"passed","Wed Jul 20 22:05:17 CST 2022","Wed Jul 20 22:05:17 CST 2022","0","Auto_Test.Test_Case.user_manage","test_case04","Test_um","","","test_06",""

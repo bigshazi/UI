@@ -1,0 +1,8 @@
+-
+  name: 解析二维码
+  request:
+    method: get
+    url: https://tenapi.cn/jxqr/
+    data:
+      url: https://tenapi.cn/qr/?txt=如果你看到这段文字代表解析成功
+  validate: None

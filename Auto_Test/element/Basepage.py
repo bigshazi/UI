@@ -1,6 +1,7 @@
 import os
 import time
 
+import pymysql as pymysql
 from selenium import webdriver
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
@@ -10,10 +11,12 @@ from Auto_Test.element.log import GetLogger
 
 log = GetLogger(logger='Basepage').get_logger()
 
-class Basepage():
+class Basepage:
     """
         定义一个页面基类，让所有页面都继承这个类，封装一些常用的页面操作方法到这个类
     """
+    #定义构造方法
+
     def __init__(self,driver):
             self.driver = driver
             log.info('[base]:正在获取driver对象：{}'.format(driver) )
@@ -53,6 +56,7 @@ class Basepage():
         self.driver.set_window_size(375,812)
         self.driver.maximize_window()
         self.driver.implicitly_wait(8)
+        log.info("页面已为H5")
 
 
     # #浏览器后退
@@ -69,6 +73,13 @@ class Basepage():
     def base_open_url(self,url):
         log.info("正在打开{}页面".format(url))
         self.driver.get(url)
+
+    #获取当前页面url
+    def get_url(self):
+        currentPageUrl =  self.driver.current_url
+        log.info('获取当前url为：{}'.format(currentPageUrl))
+        return  currentPageUrl
+
 
     # #关闭并停止浏览器服务
     def base_quit_browser(self):
@@ -178,9 +189,9 @@ class Basepage():
         y1 = int(b)
         self.driver.tap([(x1, y1), (x1, y1)], duration)
 
-    #切换frame表单方法
+    #切换iframe表单方法
     def base_switch_frame(self,type,element):
-        log.info("[base]:切换到{}fram表单".format(element))
+        log.info("[base]:切换到{}ifram表单".format(element))
         el = self.find_element(type,element) #获取表单元素
         self.driver.switch_to.frame(el)
 
@@ -224,6 +235,21 @@ class Basepage():
         """
         self.find_element(type,element).send_keys(Keys.CONTROL, 'x')
         log.info("对%s剪切" % element['element_name'])
+
+    #连接数据库
+    def query(self,sql):
+        # 连接数据库获取账号密码
+        db = pymysql.connect(host='localhost',user='root',password='123456',db='new_schem',charset='utf8')
+        # 使用cursor()方法获取操作游标
+        cursor = db.cursor()
+        #执行sql
+        cursor.execute(sql)
+        #获取查询结果
+        data =cursor.fetchall()
+        print(cursor.fetchmany(25))
+        cursor.close()#关闭游标
+        db.close()#关闭连接
+        return data
 
 
 

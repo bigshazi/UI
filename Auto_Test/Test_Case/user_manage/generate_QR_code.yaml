@@ -1,0 +1,11 @@
+-
+  name: 生成二维码
+  request:
+    method: get
+    url: https://tenapi.cn/qr/
+    data:
+      txt: https://huodong.taobao.com/wow/pm/default/nchannel/8f2c66?disableNav=YES
+      size: 10
+      margin: 1
+      ec: L
+  validate: None

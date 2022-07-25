@@ -1,0 +1,6 @@
+2022-07-19 10:05:02,185 - Basepage - INFO - [base]:正在获取driver对象：driver
+2022-07-19 10:05:06,580 - Basepage - INFO - 页面已为H5
+2022-07-19 10:05:06,581 - Basepage - INFO - 正在打开https://market.m.taobao.com/app/pm/new-main/home?pha=true&disableNav=YES页面
+2022-07-19 10:07:17,018 - Basepage - INFO - [base]:正在对:tab-3 元素实行点击事件
+2022-07-19 10:07:19,028 - Basepage - INFO - 获取当前url为：https://market.m.taobao.com/app/pm/rax-tesla/pages/my?disableNav=YES&page_inside_embed=true&pha_embed=true&spm=a2129.paimai2021.tabbar.4
+2022-07-19 10:07:19,029 - Basepage - INFO - [base]:切换到//*[@id="login-form"]/div[4]ifram表单

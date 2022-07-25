@@ -1,0 +1,10 @@
+2022-07-19 11:29:10,815 - Basepage - INFO - [base]:正在获取driver对象：driver
+2022-07-19 11:29:19,030 - Basepage - INFO - 页面已为H5
+2022-07-19 11:29:19,030 - Basepage - INFO - 正在打开https://market.m.taobao.com/app/pm/new-main/home?pha=true&disableNav=YES页面
+2022-07-19 11:29:31,075 - Basepage - INFO - [base]:正在对:tab-3 元素实行点击事件
+2022-07-19 11:29:33,133 - Basepage - INFO - 获取当前url为：https://market.m.taobao.com/app/pm/rax-tesla/pages/my?disableNav=YES&page_inside_embed=true&pha_embed=true&spm=a2129.paimai2021.tabbar.4
+2022-07-19 11:29:33,134 - Basepage - INFO - [base]:切换到/html/body/div[3]/iframeifram表单
+2022-07-19 11:29:33,207 - Basepage - INFO - [base]://div[@class='login-blocks login-links']元素查到成功，存在于当前页面
+2022-07-19 11:29:33,797 - Basepage - INFO - [base]:正在对:/html/body/div/div/div[2]/div/form/div[4]/a 元素实行点击事件
+2022-07-19 11:29:35,827 - Basepage - INFO - [base]:正在对：fm-login-id元素输入天王至尊1
+2022-07-19 11:29:38,125 - Basepage - INFO - [base]:正在对：fm-login-password元素输入Huf@921108

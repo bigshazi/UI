@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"cf062cfa2ba0337c3632bcae1e9e1639","name":"Auto_Test.Test_Case.product_manage","statistic":{"failed":1,"broken":0,"skipped":0,"passed":2,"unknown":0,"total":3}},{"uid":"597b91904dbf4f7e92f2042a27cf53d7","name":"Auto_Test.Test_Case.user_manage","statistic":{"failed":0,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":3}}]}

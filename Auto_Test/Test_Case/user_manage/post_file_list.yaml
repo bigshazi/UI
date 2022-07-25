@@ -1,0 +1,10 @@
+-
+  name:  搜索
+  request:
+    method: post
+    url: https://www.wanandroid.com/article/query/0/json
+    data:
+      k: 文章
+      pagenum: 1
+      pageSize: 10000
+  validate: None

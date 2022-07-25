@@ -1,0 +1,10 @@
+-
+  name: 获取项目list
+  request:
+    method: get
+    url: https://www.wanandroid.com/project/list/1/json
+    data:
+      cid: 294
+      pagenum: 1
+      pageSize: 10000
+  validate: None
