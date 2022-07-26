@@ -1,9 +1,5 @@
-import io
-import os
-from tkinter import Image
 
 import pytest
-import requests
 
 from Auto_Test.common.common_util import common_util
 from Auto_Test.common.requests_util import RequestUtil
@@ -53,7 +49,7 @@ class Test_um(common_util):
         validate = caseinfo['validate']
         res = RequestUtil.session.request(method=method,url=url,params=data)
         print(type(res))
-        Test_um.code_url = res.content
+        Test_um.code_url = res.content #这里保存的是图片的二进制数据
         print(Test_um.code_url)
         path = get_object_path() +'screenshots/pics.jpg'
         print(path)

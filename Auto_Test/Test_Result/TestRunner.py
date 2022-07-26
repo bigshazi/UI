@@ -2,7 +2,7 @@
 import os
 import unittest
 from BeautifulReport import BeautifulReport
-
+#单元测试
 #测试用例路径
 test_case_path =  r'D:\test\UI\Auto_Test\Test_Case'
 #测试报告存储路径
